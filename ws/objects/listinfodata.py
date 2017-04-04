@@ -10,7 +10,7 @@ class ListInfoData(Base):
     def __init__(self):
         super(ListInfoData, self).__init__()
         self.__name = "listInfoData"
-        self.__listinfodata_list = OrderedDict()
+        self.__listinfodata_list = []
 
     @property
     def listinfodata_list(self):
@@ -25,26 +25,17 @@ class ListInfoData(Base):
         """Method to set listinfodata list."""
         self.__listinfodata_list = listinfodata_list
 
-    @property
-    def current_listinfodata(self):
-        """Method to get current iteminfodata item.
-
-         :returns: The object of listinfodata.
-         """
-        return self.listinfodata_list[next(reversed(self.listinfodata_list))]
-
-    def get_listinfodata(self, id):
+    def get_listinfodata(self, listinfodata):
         """Method to get iteminfodata item.
 
          :returns: The object of listinfodata.
          """
-        return self.listinfodata_list[id]
+        try:
+            return self.listinfodata_list[listinfodata]
+        except IndexError:
+            return default
 
     def add_listinfodata(self, new_listinfodata):
         """Method to add listinfodata."""
-        #if new_listinfodata.id not in self.listinfodata_list:
-        self.listinfodata_list[new_listinfodata.id] = new_listinfodata
-
-    def all_listinfodata(self):
-        return self.listinfodata_list.values()
-        # [listinfodata for listinfodata in self.listinfodata_list if listinfodata.win == "loose"]
+        if new_listinfodata is not None:
+            self.listinfodata_list.append(new_listinfodata)
