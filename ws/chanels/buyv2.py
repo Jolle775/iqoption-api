@@ -20,8 +20,8 @@ class Buyv2(Base):
         :param option: The buying option.
         :param direction: The buying direction.
         """
-        self.__api.timesync.expiration_time = exp
-
+        self.api.timesync.expiration_time = exp
+        print(str(self.api.timesync.expiration_time))
         data = {"price": price,
                 "act": active,
                 "exp": self.api.timesync.expiration_timestamp,
